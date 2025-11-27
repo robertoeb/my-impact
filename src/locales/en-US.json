@@ -1,0 +1,130 @@
+{
+  "app": {
+    "name": "MyImpact",
+    "tagline": "Generate your performance review summary in seconds"
+  },
+  "menu": {
+    "savedReports": "Saved Reports",
+    "settings": "Settings",
+    "about": "About"
+  },
+  "settings": {
+    "title": "Settings",
+    "description": "Configure your preferences",
+    "apiKey": "OpenAI API Key",
+    "apiKeyHint": "Required for AI-generated performance summaries. Your key is stored locally and never sent to our servers.",
+    "theme": "Theme",
+    "themeSystem": "System",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "language": "Language",
+    "save": "Save"
+  },
+  "reports": {
+    "title": "Saved Reports",
+    "description": "View and load your previously saved performance reports",
+    "empty": "No saved reports yet",
+    "emptyHint": "Generate a report and save it to see it here",
+    "load": "Load",
+    "prs": "PRs"
+  },
+  "about": {
+    "title": "About",
+    "description": "Performance review summary generator",
+    "version": "Version",
+    "builtWith": "Built with",
+    "developer": "Developer",
+    "madeWith": "Made with",
+    "in": "in"
+  },
+  "search": {
+    "title": "Search Parameters",
+    "description": "Configure the date range and organization to fetch your merged PRs",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "organization": "Organization",
+    "allOrganizations": "All Organizations",
+    "generateReport": "Generate Report",
+    "fetching": "Fetching..."
+  },
+  "tabs": {
+    "overview": "Overview",
+    "pullRequests": "Pull Requests",
+    "aiSummary": "AI Summary"
+  },
+  "overview": {
+    "prsMerged": "PRs Merged",
+    "organizations": "Organizations",
+    "repositories": "Repositories",
+    "avgPrsMonth": "Avg PRs/Month",
+    "prsByMonth": "PRs by Month",
+    "contributionTrend": "Your contribution trend over time",
+    "prsByOrganization": "PRs by Organization",
+    "distributionOrgs": "Distribution across organizations",
+    "prsByRepository": "PRs by Repository",
+    "distributionProjects": "Distribution across projects",
+    "noPrsFound": "No pull requests found for the given criteria.",
+    "errorFetching": "Error fetching data",
+    "prsReviewed": "PRs Reviewed",
+    "collaborators": "Collaborators",
+    "avgTimeToMerge": "Avg Time to Merge",
+    "longestStreak": "Longest Streak",
+    "contributionActivity": "Contribution Activity",
+    "weeklyActivity": "Weekly PR merge activity"
+  },
+  "prs": {
+    "title": "Merged Pull Requests",
+    "mergedIn": "merged in",
+    "mergedOn": "Merged on",
+    "noPrsFound": "No pull requests found.",
+    "reviewedTitle": "PRs Reviewed",
+    "reviewedIn": "reviewed in this period"
+  },
+  "ai": {
+    "title": "AI-Generated Performance Summary",
+    "description": "Let AI analyze your contributions and generate a performance review summary",
+    "generateSummary": "Generate Summary",
+    "generating": "Generating...",
+    "saveReport": "Save Report",
+    "apiKeyRequired": "OpenAI API Key Required",
+    "apiKeyRequiredHint": "Click the menu icon and go to Settings to configure your API key.",
+    "errorGenerating": "Error generating summary",
+    "aiGenerated": "AI Generated",
+    "preview": "Preview",
+    "edit": "Edit",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "clickGenerate": "Click \"Generate Summary\" to create your performance review",
+    "basedOnPrs": "Based on your {count} merged PRs",
+    "generateFirst": "Generate a report first to use AI summary"
+  },
+  "save": {
+    "title": "Save Report",
+    "description": "Give your report a name to save it for later",
+    "reportName": "Report Name",
+    "placeholder": "e.g., Q4 2024 Review",
+    "saving": "Saving...",
+    "saveReport": "Save Report",
+    "updateReport": "Update Report"
+  },
+  "export": {
+    "pdf": "Export Report"
+  },
+  "compare": {
+    "button": "Compare",
+    "title": "Period Comparison",
+    "description": "Compare your contributions across different time periods to track your growth",
+    "currentPeriod": "Current Period",
+    "comparePeriod": "Compare With",
+    "compare": "Compare Periods",
+    "loading": "Loading...",
+    "results": "Comparison Results",
+    "before": "Before",
+    "after": "Now",
+    "growth": "Growth"
+  },
+  "initial": {
+    "ready": "Ready to generate your impact report",
+    "configure": "Configure the parameters above and click \"Generate Report\""
+  }
+}

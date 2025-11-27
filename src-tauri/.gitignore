@@ -1,0 +1,38 @@
+# Node.js / Frontend
+node_modules/
+dist/
+npm-debug.log
+yarn-error.log
+pnpm-debug.log*
+
+# Vite / Environment
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Rust / Tauri (CRITICAL)
+# These folders contain massive build artifacts
+src-tauri/target/
+target/
+**/*.rs.bk
+
+# OS - Mac (Since you are on macOS)
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# OS - Windows (Good practice to include)
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editors
+.idea/
+.vscode/  
+*.swp
+*.swo
+
+# Misc
+*.log

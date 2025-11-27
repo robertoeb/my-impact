@@ -1,0 +1,130 @@
+{
+  "app": {
+    "name": "MyImpact",
+    "tagline": "Gere seu resumo de avaliação de desempenho em segundos"
+  },
+  "menu": {
+    "savedReports": "Relatórios Salvos",
+    "settings": "Configurações",
+    "about": "Sobre"
+  },
+  "settings": {
+    "title": "Configurações",
+    "description": "Configure suas preferências",
+    "apiKey": "Chave da API OpenAI",
+    "apiKeyHint": "Necessária para resumos gerados por IA. Sua chave é armazenada localmente e nunca enviada aos nossos servidores.",
+    "theme": "Tema",
+    "themeSystem": "Sistema",
+    "themeLight": "Claro",
+    "themeDark": "Escuro",
+    "language": "Idioma",
+    "save": "Salvar"
+  },
+  "reports": {
+    "title": "Relatórios Salvos",
+    "description": "Visualize e carregue seus relatórios de desempenho salvos",
+    "empty": "Nenhum relatório salvo ainda",
+    "emptyHint": "Gere um relatório e salve-o para vê-lo aqui",
+    "load": "Carregar",
+    "prs": "PRs"
+  },
+  "about": {
+    "title": "Sobre",
+    "description": "Gerador de resumo de avaliação de desempenho",
+    "version": "Versão",
+    "builtWith": "Construído com",
+    "developer": "Desenvolvedor",
+    "madeWith": "Feito com",
+    "in": "em"
+  },
+  "search": {
+    "title": "Parâmetros de Busca",
+    "description": "Configure o período e a organização para buscar seus PRs mesclados",
+    "startDate": "Data Inicial",
+    "endDate": "Data Final",
+    "organization": "Organização",
+    "allOrganizations": "Todas as Organizações",
+    "generateReport": "Gerar Relatório",
+    "fetching": "Buscando..."
+  },
+  "tabs": {
+    "overview": "Visão Geral",
+    "pullRequests": "Pull Requests",
+    "aiSummary": "Resumo IA"
+  },
+  "overview": {
+    "prsMerged": "PRs Mesclados",
+    "organizations": "Organizações",
+    "repositories": "Repositórios",
+    "avgPrsMonth": "Média PRs/Mês",
+    "prsByMonth": "PRs por Mês",
+    "contributionTrend": "Sua tendência de contribuição ao longo do tempo",
+    "prsByOrganization": "PRs por Organização",
+    "distributionOrgs": "Distribuição entre organizações",
+    "prsByRepository": "PRs por Repositório",
+    "distributionProjects": "Distribuição entre projetos",
+    "noPrsFound": "Nenhum pull request encontrado para os critérios informados.",
+    "errorFetching": "Erro ao buscar dados",
+    "prsReviewed": "PRs Revisados",
+    "collaborators": "Colaboradores",
+    "avgTimeToMerge": "Tempo Médio p/ Merge",
+    "longestStreak": "Maior Sequência",
+    "contributionActivity": "Atividade de Contribuição",
+    "weeklyActivity": "Atividade semanal de merge de PRs"
+  },
+  "prs": {
+    "title": "Pull Requests Mesclados",
+    "mergedIn": "mesclados em",
+    "mergedOn": "Mesclado em",
+    "noPrsFound": "Nenhum pull request encontrado.",
+    "reviewedTitle": "PRs Revisados",
+    "reviewedIn": "revisados neste período"
+  },
+  "ai": {
+    "title": "Resumo de Desempenho Gerado por IA",
+    "description": "Deixe a IA analisar suas contribuições e gerar um resumo de avaliação de desempenho",
+    "generateSummary": "Gerar Resumo",
+    "generating": "Gerando...",
+    "saveReport": "Salvar Relatório",
+    "apiKeyRequired": "Chave da API OpenAI Necessária",
+    "apiKeyRequiredHint": "Clique no ícone do menu e vá em Configurações para configurar sua chave de API.",
+    "errorGenerating": "Erro ao gerar resumo",
+    "aiGenerated": "Gerado por IA",
+    "preview": "Visualizar",
+    "edit": "Editar",
+    "copy": "Copiar",
+    "copied": "Copiado!",
+    "clickGenerate": "Clique em \"Gerar Resumo\" para criar sua avaliação de desempenho",
+    "basedOnPrs": "Baseado nos seus {count} PRs mesclados",
+    "generateFirst": "Gere um relatório primeiro para usar o resumo por IA"
+  },
+  "save": {
+    "title": "Salvar Relatório",
+    "description": "Dê um nome ao seu relatório para salvá-lo",
+    "reportName": "Nome do Relatório",
+    "placeholder": "ex: Revisão Q4 2024",
+    "saving": "Salvando...",
+    "saveReport": "Salvar Relatório",
+    "updateReport": "Atualizar Relatório"
+  },
+  "export": {
+    "pdf": "Exportar Relatório"
+  },
+  "compare": {
+    "button": "Comparar",
+    "title": "Comparação de Períodos",
+    "description": "Compare suas contribuições em diferentes períodos para acompanhar seu crescimento",
+    "currentPeriod": "Período Atual",
+    "comparePeriod": "Comparar Com",
+    "compare": "Comparar Períodos",
+    "loading": "Carregando...",
+    "results": "Resultados da Comparação",
+    "before": "Antes",
+    "after": "Agora",
+    "growth": "Crescimento"
+  },
+  "initial": {
+    "ready": "Pronto para gerar seu relatório de impacto",
+    "configure": "Configure os parâmetros acima e clique em \"Gerar Relatório\""
+  }
+}
