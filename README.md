@@ -6,72 +6,67 @@
 
 ## 🎯 What is MyImpact?
 
-**MyImpact** is a desktop application that helps developers generate comprehensive performance review summaries by analyzing their GitHub contributions. It wraps the local GitHub CLI (`gh`) to fetch your PR data and uses OpenAI to generate professional summaries.
+**MyImpact** is a desktop application that helps developers generate comprehensive performance review summaries by analyzing their GitHub contributions. It uses the local GitHub CLI (`gh`) to fetch your PR data and OpenAI to generate professional summaries.
 
-### Key Features
+## ✨ Features
 
-- 📊 **PR Analytics** - View merged PRs, reviews, and contribution patterns
-- 🤖 **AI Summaries** - Generate professional performance review text with OpenAI
-- 📈 **Visual Charts** - Monthly trends, organization distribution, and repository breakdown
-- 🔥 **Contribution Streaks** - Track your longest streak of consistent contributions
-- 👥 **Collaboration Metrics** - See how many teammates you've helped through code reviews
-- 📄 **PDF Export** - Export your report for sharing or printing
-- 💾 **Save Reports** - Save and load reports for different review periods
-- 🌙 **Dark Mode** - Follows system preference with manual override
-- 🌐 **i18n** - English and Portuguese (Brazil) support
+### 📊 Analytics Dashboard
+- **PRs Merged** — Total pull requests merged in the selected period
+- **PRs Reviewed** — Code reviews you've contributed to
+- **Organizations** — Companies/orgs you've contributed to
+- **Repositories** — Repos with your merged PRs
+- **Avg Time to Merge** — How fast your PRs get merged
+- **Contribution Streak** — Longest streak of weekly contributions
+- **Unique Collaborators** — Teammates you've helped through reviews
 
-## 📸 Screenshots
+### 📈 Visual Charts
+- **Monthly Trends** — Bar chart of PRs over time
+- **Organization Distribution** — Pie chart by org
+- **Repository Breakdown** — Top repos by contribution
+- **Contribution Heatmap** — GitHub-style activity visualization
 
-<details>
-<summary>📊 Overview Dashboard</summary>
+### 🤖 AI-Powered Summaries
+- Generate professional performance review text
+- Powered by OpenAI GPT-4
+- Edit and customize the output
+- Markdown formatting support
+- Copy to clipboard
 
-The Overview tab shows key metrics and charts including:
-- Total PRs merged
-- PRs reviewed
-- Organizations contributed to
-- Repositories involved
-- Monthly contribution trends
-- Contribution heatmap
+### 📅 Smart Date Picker
+- Calendar with month/year dropdowns
+- Easy navigation between years
+- Localized date formats
 
-</details>
+### 📊 Period Comparison
+- Compare current period vs previous
+- See growth/decline percentages
+- Track improvement over time
 
-<details>
-<summary>📝 Pull Requests List</summary>
+### 💾 Report Management
+- Save reports for later
+- Update saved reports with new AI summaries
+- Load and delete reports
+- Export as PDF
 
-View all your merged PRs and PRs you've reviewed with:
-- PR titles with direct links to GitHub
-- Repository badges
-- Merge dates
-- Author information (for reviewed PRs)
-
-</details>
-
-<details>
-<summary>🤖 AI Summary</summary>
-
-Generate AI-powered performance review summaries that:
-- Highlight key accomplishments
-- Group contributions by theme
-- Use professional language
-- Can be edited and customized
-- Support markdown formatting
-
-</details>
+### 🎨 User Experience
+- **Dark Mode** — System, light, or dark theme
+- **Internationalization** — English and Portuguese (Brazil)
+- **Native macOS** — Traffic light buttons, drag regions
+- **Responsive** — Clean UI with smooth animations
 
 ## 🛠️ Tech Stack
 
 | Layer | Technology |
 |-------|------------|
 | **Framework** | [Tauri v2](https://tauri.app/) |
-| **Frontend** | React + TypeScript + Vite |
+| **Frontend** | React 19 + TypeScript + Vite |
 | **Styling** | Tailwind CSS v4 + shadcn/ui |
 | **Backend** | Rust |
-| **Data** | GitHub CLI (`gh`) |
-| **AI** | OpenAI API (GPT-4) |
+| **Data Source** | GitHub CLI (`gh`) |
+| **AI** | OpenAI API (GPT-4o-mini) |
+| **PDF** | html2pdf.js |
 
 ## 📋 Prerequisites
-
-Before running MyImpact, ensure you have:
 
 1. **GitHub CLI** installed and authenticated
    ```bash
@@ -94,7 +89,7 @@ Before running MyImpact, ensure you have:
 
 ## 🚀 Getting Started
 
-### Installation
+### Development
 
 ```bash
 # Clone the repository
@@ -108,62 +103,66 @@ npm install
 npm run tauri dev
 ```
 
-### Building for Production
+### Build for Production
 
 ```bash
 # Build the app
 npm run tauri build
 
-# The installer will be in src-tauri/target/release/bundle/
+# macOS: Find the installer at
+# src-tauri/target/release/bundle/dmg/MyImpact_x.x.x_aarch64.dmg
 ```
 
 ## ⚙️ Configuration
 
 ### Settings
 
-Access settings via the hamburger menu (☰) → Settings:
+Access via the menu (☰) → Settings:
 
-- **OpenAI API Key**: Required for AI-generated summaries
 - **Theme**: System / Light / Dark
 - **Language**: English (US) / Português (Brasil)
+- **OpenAI API Key**: Required for AI summaries
 
 ### Data Storage
 
-MyImpact stores data locally in `~/.myimpact/`:
-- `settings.json` - Your preferences and API key
-- `reports.json` - Saved reports
+All data is stored locally in `~/.myimpact/`:
+- `settings.json` — Preferences and API key
+- `reports.json` — Saved reports
 
 ## 📖 Usage
 
-1. **Set Date Range**: Choose the period for your performance review
-2. **Select Organization**: Filter by org or view all contributions
-3. **Generate Report**: Click to fetch your PR data
-4. **Explore Tabs**:
-   - **Overview**: Charts and metrics
-   - **Pull Requests**: Detailed PR list
-   - **AI Summary**: Generate and edit your summary
-5. **Export**: Save as PDF or save the report locally
+1. **Set Date Range** — Choose the review period
+2. **Select Organization** — Filter by org or view all
+3. **Generate Report** — Fetch your PR data
+4. **Explore**:
+   - **Overview** — Charts and metrics
+   - **Pull Requests** — Detailed PR list
+   - **AI Summary** — Generate your summary
+5. **Compare** — Compare with a previous period
+6. **Export** — Save as PDF or save the report
 
 ## 🔒 Privacy
 
-- Your GitHub data is fetched locally using `gh` CLI
-- OpenAI API key is stored locally, never sent to third parties
-- No data is collected or transmitted to external servers (except OpenAI for summaries)
+- ✅ GitHub data fetched locally via `gh` CLI
+- ✅ API key stored locally only
+- ✅ No analytics or tracking
+- ✅ No data sent to third parties (except OpenAI for summaries)
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Feel free to submit a Pull Request.
 
 ## 📄 License
 
-MIT License - see [LICENSE](LICENSE) for details.
+MIT License — see [LICENSE](LICENSE) for details.
 
 ## 👨‍💻 Author
 
 **Roberto Eustáquio**
-- GitHub: [@robertoeb](https://github.com/robertoeb)
-- LinkedIn: [/in/robertoeb](https://www.linkedin.com/in/robertoeb/)
-- Website: [robertoeb.com](https://www.robertoeb.com/)
+
+[![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat&logo=github)](https://github.com/robertoeb)
+[![LinkedIn](https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat&logo=linkedin)](https://www.linkedin.com/in/robertoeb/)
+[![Website](https://img.shields.io/badge/-Website-000?style=flat&logo=safari&logoColor=white)](https://www.robertoeb.com/)
 
 ---
 
