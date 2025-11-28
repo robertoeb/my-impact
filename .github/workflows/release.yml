@@ -3,11 +3,16 @@ name: Release
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
   workflow_dispatch:
 
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
-  release:
+  build:
+    name: Build ${{ matrix.name }}
     permissions:
       contents: write
     strategy:
@@ -15,24 +20,23 @@ jobs:
       matrix:
         include:
           - platform: macos-latest
-            args: --target aarch64-apple-darwin
-            name: macOS (Apple Silicon)
+            target: aarch64-apple-darwin
+            name: macOS ARM64
           - platform: macos-latest
-            args: --target x86_64-apple-darwin
-            name: macOS (Intel)
+            target: x86_64-apple-darwin
+            name: macOS Intel
           - platform: ubuntu-22.04
-            args: ''
+            target: ""
             name: Linux
           - platform: windows-latest
-            args: ''
+            target: ""
             name: Windows
 
     runs-on: ${{ matrix.platform }}
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Install dependencies (Ubuntu only)
+      - name: Install system dependencies (Linux)
         if: matrix.platform == 'ubuntu-22.04'
         run: |
           sudo apt-get update
@@ -41,40 +45,45 @@ jobs:
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
         with:
-          targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
+          targets: ${{ matrix.target }}
+
+      - name: Cache Rust
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: npm
 
-      - name: Install frontend dependencies
+      - name: Install dependencies
         run: npm ci
 
-      - name: Build and release
+      - name: Build and upload
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tagName: v__VERSION__
-          releaseName: 'MyImpact v__VERSION__'
+          releaseName: MyImpact v__VERSION__
           releaseBody: |
+            ## What's New
             See the [CHANGELOG](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for details.
-            
-            ## Installation
-            
-            ### macOS
-            - **Apple Silicon (M1/M2/M3)**: Download `.dmg` file with `aarch64` in the name
-            - **Intel**: Download `.dmg` file with `x86_64` in the name
-            
-            ### Windows
-            - Download the `.msi` installer
-            
-            ### Linux
-            - **Debian/Ubuntu**: Download the `.deb` file
-            - **AppImage**: Download the `.AppImage` file (portable)
+
+            ## Download
+
+            | Platform | File |
+            |----------|------|
+            | macOS (M1/M2/M3) | `MyImpact_*_aarch64.dmg` |
+            | macOS (Intel) | `MyImpact_*_x64.dmg` |
+            | Windows | `MyImpact_*_x64-setup.exe` or `.msi` |
+            | Linux | `.deb` or `.AppImage` |
+
+            ## Requirements
+            - [GitHub CLI](https://cli.github.com/) installed and authenticated (`gh auth login`)
+            - OpenAI API key (optional, for AI summaries)
           releaseDraft: true
           prerelease: false
-          args: ${{ matrix.args }}
-
+          args: ${{ matrix.target && format('--target {0}', matrix.target) || '' }}

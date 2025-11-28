@@ -1,5 +1,7 @@
 # ✨ MyImpact
 
+[![CI](https://github.com/robertoeb/my-impact/actions/workflows/ci.yml/badge.svg)](https://github.com/robertoeb/my-impact/actions/workflows/ci.yml)
+
 > Generate your performance review summary in seconds using GitHub CLI and AI
 
 ![MyImpact Screenshot](docs/screenshot-home.png)
@@ -147,6 +149,22 @@ All data is stored locally in `~/.myimpact/`:
 - ✅ API key stored locally only
 - ✅ No analytics or tracking
 - ✅ No data sent to third parties (except OpenAI for summaries)
+
+## 🧪 Testing
+
+```bash
+# Run tests
+npm run test
+
+# Run tests once
+npm run test:run
+
+# Run with coverage
+npm run test:coverage
+
+# Run Rust tests
+cd src-tauri && cargo test
+```
 
 ## 🤝 Contributing
 

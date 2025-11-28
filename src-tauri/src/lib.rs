@@ -743,3 +743,218 @@ pub fn run() {
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_get_data_dir() {
+        let dir = get_data_dir();
+        assert!(dir.to_string_lossy().contains(".myimpact"));
+    }
+
+    #[test]
+    fn test_get_settings_path() {
+        let path = get_settings_path();
+        assert!(path.to_string_lossy().contains("settings.json"));
+    }
+
+    #[test]
+    fn test_get_reports_path() {
+        let path = get_reports_path();
+        assert!(path.to_string_lossy().contains("reports.json"));
+    }
+
+    #[test]
+    fn test_pull_request_serialization() {
+        let pr = PullRequest {
+            title: "Test PR".to_string(),
+            url: "https://github.com/org/repo/pull/1".to_string(),
+            body: Some("Description".to_string()),
+            closed_at: "2024-11-15T10:00:00Z".to_string(),
+            created_at: Some("2024-11-14T08:00:00Z".to_string()),
+            number: Some(1),
+            repository: Repository {
+                name: "repo".to_string(),
+                name_with_owner: "org/repo".to_string(),
+            },
+        };
+
+        let json = serde_json::to_string(&pr).unwrap();
+        assert!(json.contains("Test PR"));
+        assert!(json.contains("org/repo"));
+    }
+
+    #[test]
+    fn test_reviewed_pr_serialization() {
+        let pr = ReviewedPullRequest {
+            title: "Reviewed PR".to_string(),
+            url: "https://github.com/org/repo/pull/2".to_string(),
+            closed_at: Some("2024-11-15T12:00:00Z".to_string()),
+            created_at: "2024-11-13T09:00:00Z".to_string(),
+            author: Author {
+                login: "teammate".to_string(),
+            },
+            repository: Repository {
+                name: "repo".to_string(),
+                name_with_owner: "org/repo".to_string(),
+            },
+        };
+
+        let json = serde_json::to_string(&pr).unwrap();
+        assert!(json.contains("Reviewed PR"));
+        assert!(json.contains("teammate"));
+    }
+
+    #[test]
+    fn test_saved_report_serialization() {
+        let report = SavedReport {
+            id: "report-123".to_string(),
+            name: "Q4 Review".to_string(),
+            created_at: "2024-11-27T10:00:00Z".to_string(),
+            org_name: "org".to_string(),
+            date_range: "Nov 1 - Nov 27".to_string(),
+            pr_count: 10,
+            summary: "Great work!".to_string(),
+            pull_requests: vec![],
+        };
+
+        let json = serde_json::to_string(&report).unwrap();
+        assert!(json.contains("Q4 Review"));
+        assert!(json.contains("report-123"));
+    }
+
+    #[test]
+    fn test_app_settings_serialization() {
+        let settings = AppSettings {
+            api_key: Some("sk-test-key".to_string()),
+        };
+
+        let json = serde_json::to_string(&settings).unwrap();
+        let parsed: AppSettings = serde_json::from_str(&json).unwrap();
+        assert_eq!(parsed.api_key, Some("sk-test-key".to_string()));
+    }
+
+    #[test]
+    fn test_app_settings_empty() {
+        let settings = AppSettings { api_key: None };
+
+        let json = serde_json::to_string(&settings).unwrap();
+        let parsed: AppSettings = serde_json::from_str(&json).unwrap();
+        assert!(parsed.api_key.is_none());
+    }
+
+    #[test]
+    fn test_fetch_result_success() {
+        let result = FetchResult {
+            success: true,
+            data: Some(vec![]),
+            error: None,
+        };
+
+        assert!(result.success);
+        assert!(result.data.is_some());
+        assert!(result.error.is_none());
+    }
+
+    #[test]
+    fn test_fetch_result_error() {
+        let result = FetchResult {
+            success: false,
+            data: None,
+            error: Some("Error message".to_string()),
+        };
+
+        assert!(!result.success);
+        assert!(result.data.is_none());
+        assert_eq!(result.error, Some("Error message".to_string()));
+    }
+
+    #[test]
+    fn test_ai_result_success() {
+        let result = AiResult {
+            success: true,
+            summary: Some("AI summary".to_string()),
+            error: None,
+        };
+
+        assert!(result.success);
+        assert_eq!(result.summary, Some("AI summary".to_string()));
+    }
+
+    #[test]
+    fn test_organizations_result() {
+        let result = OrganizationsResult {
+            success: true,
+            organizations: Some(vec!["org1".to_string(), "org2".to_string()]),
+            error: None,
+        };
+
+        assert!(result.success);
+        assert_eq!(result.organizations.unwrap().len(), 2);
+    }
+
+    #[test]
+    fn test_save_report_result() {
+        let result = SaveReportResult {
+            success: true,
+            error: None,
+        };
+
+        assert!(result.success);
+        assert!(result.error.is_none());
+    }
+
+    #[test]
+    fn test_load_reports_result() {
+        let result = LoadReportsResult {
+            success: true,
+            reports: Some(vec![]),
+            error: None,
+        };
+
+        assert!(result.success);
+        assert!(result.reports.is_some());
+    }
+
+    #[test]
+    fn test_load_settings_result() {
+        let result = LoadSettingsResult {
+            success: true,
+            settings: Some(AppSettings { api_key: None }),
+            error: None,
+        };
+
+        assert!(result.success);
+        assert!(result.settings.is_some());
+    }
+
+    #[test]
+    fn test_repository_deserialization() {
+        let json = r#"{"name": "repo", "nameWithOwner": "org/repo"}"#;
+        let repo: Repository = serde_json::from_str(json).unwrap();
+
+        assert_eq!(repo.name, "repo");
+        assert_eq!(repo.name_with_owner, "org/repo");
+    }
+
+    #[test]
+    fn test_author_deserialization() {
+        let json = r#"{"login": "user123"}"#;
+        let author: Author = serde_json::from_str(json).unwrap();
+
+        assert_eq!(author.login, "user123");
+    }
+
+    #[test]
+    fn test_find_gh_cli_returns_option() {
+        let result = find_gh_cli();
+        // Result could be Some or None depending on the environment
+        // Just verify it doesn't panic
+        match result {
+            Some(path) => assert!(path.exists()),
+            None => (),
+        }
+    }
+}
