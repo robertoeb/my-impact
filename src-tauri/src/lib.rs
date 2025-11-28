@@ -19,11 +19,9 @@ fn find_gh_cli() -> Option<PathBuf> {
     }
 
     if let Ok(output) = Command::new("/usr/bin/which").arg("gh").output() {
-        if output.status.success() {
-            let path = String::from_utf8_lossy(&output.stdout).trim().to_string();
-            if !path.is_empty() {
-                return Some(PathBuf::from(path));
-            }
+        let path = String::from_utf8_lossy(&output.stdout).trim().to_string();
+        if output.status.success() && !path.is_empty() {
+            return Some(PathBuf::from(path));
         }
     }
 
@@ -463,11 +461,9 @@ fn fetch_github_activity(
         "200".to_string(),
     ];
 
-    if let Some(ref org) = org_name {
-        if !org.is_empty() {
-            args.insert(4, "--owner".to_string());
-            args.insert(5, org.clone());
-        }
+    if let Some(org) = org_name.as_ref().filter(|o| !o.is_empty()) {
+        args.insert(4, "--owner".to_string());
+        args.insert(5, org.to_string());
     }
 
     let mut cmd = match gh_command() {
